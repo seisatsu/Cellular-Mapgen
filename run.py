@@ -8,7 +8,7 @@
 import cellular, postprocess
 
 #####   CONFIG SECTION   #####
-G = cellular.run(100, 50, 45, True, 4, 20000) # Generator values, see "cellular.py".
+G = cellular.run(100, 50, 45, 4, 20000, True) # Generator values, see "cellular.py".
 pp_passes = 10 # Number of cell culling postprocessor passes.
 neighbor_threshold = 3 # Neighbor threshold for cell culling postprocessor.
 inverse_operation = False # Perform inverse cell culling postprocessor operation.

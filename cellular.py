@@ -84,7 +84,7 @@ def examine_neighbors(G, x, y):
 
 	return c
 
-def evolve(G, o, n, i):
+def evolve(G, n, i, o):
 	"""
 	Choose a cell at random, and modify its state based on the states of its 
 	neighbors, using the neighbor threshold "n". Continue for "i" iterations. 
@@ -108,22 +108,22 @@ def evolve(G, o, n, i):
 				G.put(x, y, True)
 		gen += 1
 
-def run(w, h, p, o, n, i):
+def run(w, h, p, n, i, o):
 	"""
 	Create a new map using the cellular automata algorithm.
 	
 	* "w" is the map width.
 	* "h" is the map height.
 	* "p" is the probability of each cell being closed at start. (0 - 100)
-	* "o" is the operation switch. (Regular operation if True, inverse if False)
 	* "n" is the neighbor threshold. (0 - 8)
 	* "i" is the number of iterations. (0 - infinity)
+	* "o" is the operation switch. (Regular operation if True, inverse if False)
 	"""
 	G = Grid(w, h, False)
 	
 	initialize(G, p)
 	
-	evolve(G, o, n, i)
+	evolve(G, n, i, o)
 	
 	return G
 
