@@ -14,7 +14,7 @@ neighbor_threshold = random.randint(1, 3)
 ##### END RANDOM VALUE ROLL SECTION #####
 
 #####   CONFIG SECTION   #####
-inverse_operation = False # Perform inverse postprocessor cell culling operation.
+inverse_operation = False # Perform inverse cell culling postprocessor operation.
 enclose = True # Run the grid enclosing postprocessor.
 ##### END CONFIG SECTION #####
 

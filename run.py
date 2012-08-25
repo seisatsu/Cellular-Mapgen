@@ -9,9 +9,9 @@ import cellular, postprocess
 
 #####   CONFIG SECTION   #####
 G = cellular.run(100, 50, 45, True, 4, 20000) # Generator values, see "cellular.py".
-pp_passes = 10 # Number of postprocessor cell culling passes.
-neighbor_threshold = 3 # Neighbor threshold for postprocessor cell culling.
-inverse_operation = False # Perform inverse postprocessor cell culling operation.
+pp_passes = 10 # Number of cell culling postprocessor passes.
+neighbor_threshold = 3 # Neighbor threshold for cell culling postprocessor.
+inverse_operation = False # Perform inverse cell culling postprocessor operation.
 enclose = True # Run the grid enclosing postprocessor.
 ##### END CONFIG SECTION #####
 

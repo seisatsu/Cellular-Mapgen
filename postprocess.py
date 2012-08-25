@@ -24,8 +24,8 @@
 ## IN THE SOFTWARE.
 ## **********
 
-# Cellular Automata Map Postprocessor Functions
-# These postprocessor functions are written for game map processing.
+# Cellular Automata Map Postprocessing Functions
+# These postprocessing functions are written for game map processing.
 
 import cellular
 import copy
