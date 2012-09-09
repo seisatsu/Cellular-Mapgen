@@ -16,12 +16,16 @@ neighbor_threshold = random.randint(1, 3)
 #####   CONFIG SECTION   #####
 inverse_operation = False # Perform inverse cell culling postprocessor operation.
 enclose = True # Run the grid enclosing postprocessor.
+fill_not_largest = False # Fill cells in all areas but the largest.
 ##### END CONFIG SECTION #####
 
 i = 0
 while i < pp_passes:
-	G = postprocess.cull(G, neighbor_threshold, not inverse_operation)
+	postprocess.cull(G, neighbor_threshold, not inverse_operation)
 	i += 1
+
+if fill_not_largest:
+	postprocess.largest_group(G, True, True)
 
 if enclose:
 	postprocess.enclose(G)

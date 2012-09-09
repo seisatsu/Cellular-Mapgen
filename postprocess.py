@@ -28,7 +28,6 @@
 # These postprocessing functions are written for game map processing.
 
 import cellular
-import copy
 
 def cull(G, n, o):
 	"""
@@ -38,22 +37,18 @@ def cull(G, n, o):
 	"""
 	wi, hi = 0, 0
 	w, h = G.size()
-	G2 = copy.deepcopy(G)
 	
 	while wi < w:
 		while hi < h:
 			if o:
 				if cellular.examine_neighbors(G, wi, hi) >= 8-n:
-					G2.put(wi, hi, True)
+					G.put(wi, hi, True)
 			else:
 				if cellular.examine_neighbors(G, wi, hi) <= 8-n:
-					G2.put(wi, hi, True)
+					G.put(wi, hi, True)
 			hi += 1
 		wi += 1
 		hi = 0
-	
-	del G
-	return G2
 
 def enclose(G):
 	"""
@@ -78,4 +73,81 @@ def enclose(G):
 	while wi < w: # Bottom
 		G.put(wi, hi, False)
 		wi += 1
+
+def fill_group(G, x, y, sim):
+	"""
+	Starting from the cell at "x" by "y", switch the states of all contiguous 
+	cells with the same state as the starting cell. If "sim" is True, only 
+	simulate a fill operation. Return a set containing the coordinates of cells 
+	filled.
+	"""
+	cell = ()
+	group = set()
+	queue = []
+	size = G.size()
+	target = G.get(x, y)
+	
+	queue.append((x, y))
+	while queue:
+		if 0 <= queue[-1][0] < size[0]-1 and 0 <= queue[-1][1] < size[1]-1:
+			cell = queue.pop(-1)
+		else:
+			queue.pop(-1)
+			continue
+		if G.get(*cell) == target and not cell in group:
+			if not sim:
+				G.put(*cell, val=(not target))
+			group.add(cell)
+			queue.append((cell[0]+1, cell[1]))
+			queue.append((cell[0]-1, cell[1]))
+			queue.append((cell[0], cell[1]+1))
+			queue.append((cell[0], cell[1]-1))
+
+	return group
+
+def largest_group(G, closed, fill):
+	"""
+	Return a set containing the largest contiguous group in the map of closed 
+	cells if "closed" is True, open cells if False. Fill the smaller groups 
+	with the opposite state if "fill" is True.
+	"""
+	wi, hi = 0, 0
+	w, h = G.size()
+	cells = set()
+	groups = []
+	largest = set()
+	
+	# Construct a set of the closed (or open) cells in the map.
+	while wi < w-1:
+		while hi < h-1:
+			if closed:
+				if G.get(wi, hi):
+					cells.add((wi, hi))
+			else:
+				if not G.get(wi, hi):
+					cells.add((wi, hi))
+			hi += 1
+		wi += 1
+		hi = 0
+	
+	# Split cells into contiguous groups.
+	while cells:
+		groups.append(fill_group(G, *list(cells)[0], sim=True))
+		for cell in groups[-1]:
+			cells.remove(cell)
+	
+	# Find the largest group.
+	l = set()
+	for group in groups:
+		if len(group) > len(l):
+			l = group
+	largest = l
+	
+	# Fill all smaller groups.
+	if fill:
+		for group in groups:
+			if group != largest:
+				fill_group(G, *list(group)[0], sim=False)
+	
+	return largest
 
