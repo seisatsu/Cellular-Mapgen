@@ -33,7 +33,7 @@ def cull(G, n, o):
 	"""
 	Cull each cell in the grid (switch states) based on the states of its 
 	neighbors, using the neighbor threshold "n". Perform inverse operation if 
-	"o" is False.
+	"o" is False. This can remove "pepper" from the map.
 	"""
 	wi, hi = 0, 0
 	w, h = G.size()
@@ -52,7 +52,7 @@ def cull(G, n, o):
 
 def enclose(G):
 	"""
-	Create a one-wide permimeter on the sides of the grid.
+	Create a one-wide permimeter along the edges of the grid.
 	"""
 	w, h = G.size()
 	
