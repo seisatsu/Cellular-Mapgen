@@ -19,8 +19,7 @@ File List:
 The included test vectors demonstrate the use of the algorithm, and dump the 
 generated maps to the console in an ascii representation.
 
-The algorithm has no dependencies except for Python 2.7.X. It may work on Python
-2.6.X, but this has not been tested.
+The algorithm has no dependencies except for Python. (2 or 3)
 
 Notes:
 * Higher iteration counts lower the complexity of the map, while too little 

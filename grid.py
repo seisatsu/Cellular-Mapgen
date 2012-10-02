@@ -119,7 +119,7 @@ class Grid:
 			else: # Next row.
 				wi = 0
 				hi += 1
-				print r
+				print(r)
 				r = ""
 	
 	def fdump(self, tr):
@@ -142,7 +142,7 @@ class Grid:
 			else: # Next row.
 				wi = 0
 				hi += 1
-				print r
+				print(r)
 				r = ""
 	
 	def pbmdump(self, rbw):
@@ -150,8 +150,8 @@ class Grid:
 		Dump a PBM image of the grid data (True/False) to stdout, reversing the 
 		black and white values if "rbw" is True. (PBM dump.)
 		"""
-		print "P1" # Magic Header
-		print str(len(self.__grid))+" "+str(len(self.__grid[0])) # Size Header
+		print("P1") # Magic Header
+		print(str(len(self.__grid))+" "+str(len(self.__grid[0]))) # Size Header
 		if rbw:
 			self.dump({True: "0", False: "1"})
 		else:
@@ -163,8 +163,8 @@ class Grid:
 		black and white values if "rbw" is True, and with x and y axes 
 		exchanged. (Flipped PBM dump.)
 		"""
-		print "P1" # Magic Header
-		print str(len(self.__grid))+" "+str(len(self.__grid[0])) # Size Header
+		print("P1") # Magic Header
+		print(str(len(self.__grid))+" "+str(len(self.__grid[0]))) # Size Header
 		if rbw:
 			self.fdump({True: "0", False: "1"})
 		else:
