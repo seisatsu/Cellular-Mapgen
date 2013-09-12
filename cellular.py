@@ -108,7 +108,7 @@ def evolve(G, n, i, o):
 				G.put(x, y, True)
 		gen += 1
 
-def run(w, h, p, n, i, o):
+def run(w, h, p, n, i, o, s=None):
 	"""
 	Create a new map using the cellular automata algorithm.
 	
@@ -118,8 +118,12 @@ def run(w, h, p, n, i, o):
 	* "n" is the neighbor threshold. (0 - 8)
 	* "i" is the number of iterations. (0 - infinity)
 	* "o" is the operation switch. (Regular operation if True, inverse if False)
+	* "s" is the random seed. If not passed, defaults to the system timer.)
 	"""
 	G = Grid(w, h, False)
+	
+	if s != None:
+		random.seed(s)
 	
 	initialize(G, p)
 	
